@@ -18,7 +18,11 @@
         "episodes": "Episodes",
         "subscribe": "Subscribe with any podcast app using the RSS feed",
         "home": "GRAC Labs podcasts",
-        "minutes": "min"
+        "minutes": "min",
+        "spotify": "Listen on Spotify"
+      },
+      "links": {
+        "spotify": "https://open.spotify.com/show/4k85HHAMbFI3YRl0Lm7GF2"
       }
     },
     "es": {
@@ -35,8 +39,10 @@
         "episodes": "Episodios",
         "subscribe": "Suscríbase con cualquier app de pódcast usando el feed RSS",
         "home": "Pódcasts de GRAC Labs",
-        "minutes": "min"
-      }
+        "minutes": "min",
+        "spotify": "Escuchar en Spotify"
+      },
+      "links": {}
     }
   },
   "audio_retention_days": 84

@@ -44,6 +44,8 @@ a { color: var(--blue); }
   display: inline-block; padding: 9px 16px; border-radius: 999px; text-decoration: none; font-weight: 600;
   background: var(--navy); color: #fff;
 }
+.btn.spotify { background: #1DB954; color: #fff; }
+.listen { margin: 10px 0 0; }
 .btn.alt { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
 .contact { max-width: 980px; margin: 0 auto 48px; padding: 0 20px; text-align: center; color: var(--muted); }
 header.show {

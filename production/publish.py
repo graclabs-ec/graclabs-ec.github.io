@@ -159,6 +159,11 @@ def build_page(show, eps):
             f'<audio controls preload="none" src="{html.escape(e["url"])}"></audio>\n'
             f'<details><summary>Notes</summary>\n{notes_html(e["notes"])}\n</details>\n'
             f'</article>')
+    links = show.get("links", {})
+    listen = ""
+    if links.get("spotify"):
+        listen = (f'<p class="listen"><a class="btn spotify" href="{html.escape(links["spotify"])}">'
+                  f'{html.escape(lab.get("spotify", "Spotify"))}</a></p>')
     page = f"""<!DOCTYPE html>
 <html lang="{show['language']}">
 <head>
@@ -178,6 +183,7 @@ def build_page(show, eps):
 <h1>{html.escape(show['title'])}</h1>
 <p>{html.escape(show['page_intro'])}</p>
 <p class="feed">{html.escape(lab['subscribe'])}: <a href="feed.xml">{SITE}/{slug}/feed.xml</a></p>
+{listen}
 </div>
 </header>
 <main>
