@@ -1,8 +1,9 @@
 """Publish one day's episodes of The Cuenca Brief and Cuenca en Breve.
 
-Uploads the MP3s as assets of a GitHub release, records each episode in
-<show>/episodes.json, rebuilds both RSS feeds and show pages, then commits
-and pushes so GitHub Pages serves the update.
+Copies the MP3s into <show>/audio/, records each episode in <show>/episodes.json,
+drops episodes (and their audio) older than the retention window in shows.json,
+rebuilds both RSS feeds and show pages, then commits and pushes so GitHub Pages
+serves the update.
 
 Example:
   python3 -I production/publish.py --repo /path/to/graclabs-ec.github.io --date 2026-11-17 \
@@ -19,6 +20,7 @@ import html
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 from xml.sax.saxutils import escape, quoteattr
@@ -31,7 +33,6 @@ ap.add_argument("--en")
 ap.add_argument("--en-notes")
 ap.add_argument("--es")
 ap.add_argument("--es-notes")
-ap.add_argument("--tag", help="release tag (default ep-DATE, or ep-DATE-trailer)")
 ap.add_argument("--rebuild-only", action="store_true")
 ap.add_argument("--no-push", action="store_true")
 ap.add_argument("--commit-note", default="", help="extra lines appended to the commit message")
@@ -191,16 +192,6 @@ def build_page(show, eps):
         f.write(page)
 
 
-def upload(tag, files, date):
-    exists = subprocess.run(["gh", "release", "view", tag, "--repo", GH_REPO],
-                            capture_output=True, text=True).returncode == 0
-    if exists:
-        run(["gh", "release", "upload", tag, *files, "--clobber", "--repo", GH_REPO])
-    else:
-        run(["gh", "release", "create", tag, *files, "--repo", GH_REPO, "--target", "main",
-             "--title", f"Episodes {date}", "--notes", f"Audio for The Cuenca Brief and Cuenca en Breve, {date}."])
-
-
 def git_publish(msg):
     g = ["git", "-C", REPO, "-c", "user.name=GRAC Labs", "-c", f"user.email={CFG['owner_email']}"]
     run(g + ["add", "-A"])
@@ -229,16 +220,14 @@ if args.rebuild_only:
 
 if not args.date:
     sys.exit("--date is required")
-tag = args.tag or (f"ep-{args.date}" + ("-trailer" if args.kind == "trailer" else ""))
 pairs = [(lang, mp3, notes) for lang, mp3, notes in
          (("en", args.en, args.en_notes), ("es", args.es, args.es_notes)) if mp3]
 for lang, mp3, notes in pairs:
     if not notes or not os.path.exists(mp3) or not os.path.exists(notes):
         sys.exit(f"missing file for {lang}: {mp3} / {notes}")
 
-upload(tag, [mp3 for _, mp3, _ in pairs], args.date)
-
 now = dt.datetime.now(dt.timezone.utc)
+keep_days = int(CFG.get("audio_retention_days", 84))
 for lang, mp3, notes in pairs:
     show = CFG["shows"][lang]
     slug = show["slug"]
@@ -249,14 +238,29 @@ for lang, mp3, notes in pairs:
         "title": title,
         "notes": body,
         "kind": args.kind,
-        "url": f"https://github.com/{GH_REPO}/releases/download/{tag}/{os.path.basename(mp3)}",
+        "url": f"{SITE}/{slug}/audio/{os.path.basename(mp3)}",
         "bytes": os.path.getsize(mp3),
         "seconds": duration_seconds(mp3),
         "published": now.isoformat(timespec="seconds"),
         "pub_date": email.utils.format_datetime(now, usegmt=True),
     }
+    audio_dir = os.path.join(REPO, slug, "audio")
+    os.makedirs(audio_dir, exist_ok=True)
+    shutil.copyfile(mp3, os.path.join(audio_dir, os.path.basename(mp3)))
     eps = [e for e in load_episodes(slug) if e["guid"] != guid]
     eps.append(ep)
+    # Retention: keep trailers, drop full episodes older than the window, with their audio.
+    cutoff = now - dt.timedelta(days=keep_days)
+    kept = []
+    for e in eps:
+        if e["kind"] != "trailer" and dt.datetime.fromisoformat(e["published"]) < cutoff:
+            old = os.path.join(audio_dir, e["url"].rsplit("/", 1)[-1])
+            if os.path.exists(old):
+                os.remove(old)
+            print(f"retired {e['guid']}")
+        else:
+            kept.append(e)
+    eps = kept
     save_episodes(slug, eps)
     build_feed(show, eps)
     build_page(show, eps)

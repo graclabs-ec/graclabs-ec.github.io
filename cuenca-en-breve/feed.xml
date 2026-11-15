@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>Cuenca en Breve</title>
+<link>https://graclabs-ec.github.io/cuenca-en-breve/</link>
+<atom:link href="https://graclabs-ec.github.io/cuenca-en-breve/feed.xml" rel="self" type="application/rss+xml"/>
+<language>es</language>
+<copyright>© 2026 GRAC Labs</copyright>
+<description><![CDATA[Cuenca en Breve es un resumen de noticias corto y directo para quienes viven en Cuenca, Ecuador. Cuatro veces por semana: lo que pasa en Cuenca y el Azuay, las noticias más importantes del Ecuador y de la región andina, avisos prácticos, oportunidades, cultura y eventos. Domingo temprano: el resumen de la semana y lo que viene. Martes por la tarde: lo más reciente. Jueves: la agenda del fin de semana. Viernes temprano: una actualización rápida para el finde. Cada episodio incluye sus fuentes en las notas.
+
+Se escribe con ayuda de inteligencia artificial y se narra con una voz de inteligencia artificial. Una producción de GRAC Labs. Para publicidad, escríbanos por WhatsApp al +593 99 535 8888 (https://wa.me/593995358888) o al correo graclabs.ec@gmail.com.]]></description>
+<itunes:author>GRAC Labs</itunes:author>
+<itunes:owner>
+<itunes:name>GRAC Labs</itunes:name>
+<itunes:email>graclabs.ec@gmail.com</itunes:email>
+</itunes:owner>
+<itunes:image href="https://graclabs-ec.github.io/cuenca-en-breve/cover.jpg"/>
+<image><url>https://graclabs-ec.github.io/cuenca-en-breve/cover.jpg</url><title>Cuenca en Breve</title><link>https://graclabs-ec.github.io/cuenca-en-breve/</link></image>
+<itunes:category text="News"><itunes:category text="Daily News"/></itunes:category>
+<itunes:explicit>false</itunes:explicit>
+<itunes:type>episodic</itunes:type>
+<lastBuildDate>Sun, 15 Nov 2026 22:37:31 GMT</lastBuildDate>
+<generator>GRAC Labs publish.py</generator>
+<item>
+<title>Bienvenidos a Cuenca en Breve</title>
+<link>https://graclabs-ec.github.io/cuenca-en-breve/#cuenca-en-breve-2026-11-15-trailer</link>
+<description><![CDATA[<p>Les presentamos Cuenca en Breve, un resumen de noticias corto y directo para quienes viven en Cuenca, Ecuador: lo que pasa en Cuenca y el Azuay, las noticias más importantes del país y de la región andina, avisos prácticos, oportunidades, cultura y eventos.</p>
+<p>Episodios nuevos: domingo temprano (el resumen de la semana y lo que viene), martes por la tarde, jueves a media mañana (la agenda del fin de semana) y viernes temprano (una actualización rápida para el finde). Las fuentes de cada noticia están en las notas de cada episodio.</p>
+<p>Cuenca en Breve se escribe con ayuda de inteligencia artificial y se narra con una voz de inteligencia artificial. Producido por GRAC Labs. Para publicidad, escríbanos por WhatsApp al +593 99 535 8888 (<a href="https://wa.me/593995358888">https://wa.me/593995358888</a>) o al correo graclabs.ec@gmail.com.</p>]]></description>
+<content:encoded><![CDATA[<p>Les presentamos Cuenca en Breve, un resumen de noticias corto y directo para quienes viven en Cuenca, Ecuador: lo que pasa en Cuenca y el Azuay, las noticias más importantes del país y de la región andina, avisos prácticos, oportunidades, cultura y eventos.</p>
+<p>Episodios nuevos: domingo temprano (el resumen de la semana y lo que viene), martes por la tarde, jueves a media mañana (la agenda del fin de semana) y viernes temprano (una actualización rápida para el finde). Las fuentes de cada noticia están en las notas de cada episodio.</p>
+<p>Cuenca en Breve se escribe con ayuda de inteligencia artificial y se narra con una voz de inteligencia artificial. Producido por GRAC Labs. Para publicidad, escríbanos por WhatsApp al +593 99 535 8888 (<a href="https://wa.me/593995358888">https://wa.me/593995358888</a>) o al correo graclabs.ec@gmail.com.</p>]]></content:encoded>
+<enclosure url="https://graclabs-ec.github.io/cuenca-en-breve/audio/cuenca-en-breve-trailer.mp3" length="715381" type="audio/mpeg"/>
+<guid isPermaLink="false">cuenca-en-breve-2026-11-15-trailer</guid>
+<pubDate>Sun, 15 Nov 2026 22:37:30 GMT</pubDate>
+<itunes:duration>89</itunes:duration>
+<itunes:episodeType>trailer</itunes:episodeType>
+<itunes:explicit>false</itunes:explicit>
+</item>
+</channel>
+</rss>
