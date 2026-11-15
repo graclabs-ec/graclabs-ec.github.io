@@ -74,6 +74,7 @@ _sep = r"[\s-]?"
 WA_NUM = r"(?:\+?593" + _sep + _sep.join(_local) + r"|0" + _sep.join(_local) + r")"
 TOKEN_RE = re.compile(
     r"(?P<wa>" + WA_NUM + r")(?P<waurl>\s*\(https?://wa\.me/\d+\))?"
+    r"|(?P<spot>Spotify)\s*\((?P<spoturl>https://open\.spotify\.com/[^\s)<]+)\)"
     r"|(?P<url>https?://[^\s<>\"]+[^\s<>\".,;:!?)\]])"
     r"|(?P<email>[\w.+-]+@[\w-]+(?:\.[\w-]+)+)")
 
@@ -81,6 +82,8 @@ TOKEN_RE = re.compile(
 def _link(m):
     if m.group("wa"):
         return f'<a href="https://wa.me/{WA_DIGITS}">{m.group("wa")}</a>'
+    if m.group("spot"):
+        return f'<a href="{m.group("spoturl")}">Spotify</a>'
     if m.group("url"):
         return f'<a href="{m.group("url")}">{m.group("url")}</a>'
     return f'<a href="mailto:{m.group("email")}">{m.group("email")}</a>'

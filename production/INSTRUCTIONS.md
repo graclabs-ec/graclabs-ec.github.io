@@ -66,7 +66,14 @@ STEP 7 - WRITE THE SHOW NOTES for each show in its own language, as plain text r
 - "In this episode:" / "En este episodio:" with the headlines, one per line.
 - The chapter lines from the matching .chapters.txt file, copied exactly, each on its own line, if the file isn't empty.
 - "Sources:" / "Fuentes:" with each article used as "Outlet – headline: URL".
-- Closing lines, exactly: "The Cuenca Brief is written with AI assistance and narrated by an AI voice. Produced by GRAC Labs. For advertising, message us on WhatsApp at +593 99 535 8888 (https://wa.me/593995358888) or email graclabs.ec@gmail.com." / "Cuenca en Breve se escribe con ayuda de inteligencia artificial y se narra con una voz de inteligencia artificial. Producido por GRAC Labs. Para publicidad, escríbanos por WhatsApp al +593 99 535 8888 (https://wa.me/593995358888) o al correo graclabs.ec@gmail.com."
+- End with these three lines, each on its own line, exactly as written. English:
+Like what you hear? Rate The Cuenca Brief on Spotify (https://open.spotify.com/show/4k85HHAMbFI3YRl0Lm7GF2).
+For feedback or advertising, message us on WhatsApp at +593 99 535 8888 (https://wa.me/593995358888) or email graclabs.ec@gmail.com.
+The Cuenca Brief is written with AI assistance and narrated by an AI voice. Produced by GRAC Labs.
+Spanish:
+¿Le gusta lo que escucha? Califique Cuenca en Breve en Spotify (https://open.spotify.com/show/3o3nURnLz0GW8mWpZXSPOW).
+Para comentarios o publicidad, escríbanos por WhatsApp al +593 99 535 8888 (https://wa.me/593995358888) o al correo graclabs.ec@gmail.com.
+Cuenca en Breve se escribe con ayuda de inteligencia artificial y se narra con una voz de inteligencia artificial. Producido por GRAC Labs.
 
 STEP 8 - PUBLISH TO THE FEEDS. From your working directory run:
 python3 -I REPO/production/publish.py --repo REPO --date YYYY-MM-DD --en cuenca-brief-YYYY-MM-DD.mp3 --en-notes cuenca-brief-YYYY-MM-DD-notes.txt --es cuenca-en-breve-YYYY-MM-DD.mp3 --es-notes cuenca-en-breve-YYYY-MM-DD-notes.txt
