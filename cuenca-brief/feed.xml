@@ -6,7 +6,7 @@
 <atom:link href="https://graclabs-ec.github.io/cuenca-brief/feed.xml" rel="self" type="application/rss+xml"/>
 <language>en</language>
 <copyright>© 2026 GRAC Labs</copyright>
-<description><![CDATA[The Cuenca Brief is a short, friendly news briefing for English speakers living in and around Cuenca, Ecuador. Four times a week: news from Cuenca and Azuay, the big stories from across Ecuador and the Andes, practical notices you can use, opportunities, culture and events. Sunday morning: the week that was and the week ahead. Tuesday afternoon: the latest news. Thursday: your weekend preview. Friday morning: a quick weekend update. Every episode lists its sources in the notes.
+<description><![CDATA[The Cuenca Brief is a short, friendly news briefing for English speakers living in and around Cuenca, Ecuador. Four times a week: news from Cuenca and Azuay, the big stories from across Ecuador and the Andes, practical notices you can use, opportunities, culture and events. New episodes (Cuenca time): Sundays around 5 am, the week that was and the week ahead; Tuesdays around 4 pm, the latest news; Thursdays around 11 am, a catch-up and your weekend preview; Fridays around 5 am, a quick weekend update. Every episode lists its sources in the notes.
 
 Written with AI assistance and narrated by an AI voice. Produced by GRAC Labs. For advertising, message us on WhatsApp at +593 99 535 8888 (https://wa.me/593995358888) or email graclabs.ec@gmail.com.]]></description>
 <itunes:author>GRAC Labs</itunes:author>
@@ -19,21 +19,23 @@ Written with AI assistance and narrated by an AI voice. Produced by GRAC Labs. F
 <itunes:category text="News"><itunes:category text="Daily News"/></itunes:category>
 <itunes:explicit>false</itunes:explicit>
 <itunes:type>episodic</itunes:type>
-<lastBuildDate>Sun, 15 Nov 2026 22:37:31 GMT</lastBuildDate>
+<lastBuildDate>Sun, 15 Nov 2026 22:41:47 GMT</lastBuildDate>
 <generator>GRAC Labs publish.py</generator>
 <item>
-<title>Welcome to The Cuenca Brief</title>
+<title>Premiere: Welcome to The Cuenca Brief</title>
 <link>https://graclabs-ec.github.io/cuenca-brief/#cuenca-brief-2026-11-15-trailer</link>
-<description><![CDATA[<p>Meet The Cuenca Brief, a short, friendly news briefing for English speakers living in and around Cuenca, Ecuador: news from Cuenca and Azuay, the big stories from across Ecuador and the Andes, practical notices you can use, opportunities, culture and events.</p>
-<p>New episodes: early Sunday morning (the week that was and the week ahead), Tuesday afternoon, Thursday late morning (your weekend preview) and early Friday morning (a quick weekend update). Sources for every story are listed in each episode's notes.</p>
+<description><![CDATA[<p>The Cuenca Brief is a short, friendly news briefing for English speakers living in and around Cuenca, Ecuador: news from Cuenca and Azuay, the big stories from across Ecuador and the Andes, practical notices you can use, opportunities, science and technology, culture, events and a little sports.</p>
+<p>When new episodes arrive (Cuenca time, UTC−5):<br>Sundays around 5:00 am: the week that was and the week ahead (up to 15 minutes)<br>Tuesdays around 4:00 pm: the latest news (up to 10 minutes)<br>Thursdays around 11:00 am: a quick catch-up and your weekend preview (up to 10 minutes)<br>Fridays around 5:00 am: a short weekend update (up to 5 minutes)</p>
+<p>First regular episode: Tuesday, November 17, 2026, around 4:00 pm. Sources for every story are listed in each episode's notes.</p>
 <p>The Cuenca Brief is written with AI assistance and narrated by an AI voice. Produced by GRAC Labs. For advertising, message us on WhatsApp at +593 99 535 8888 (<a href="https://wa.me/593995358888">https://wa.me/593995358888</a>) or email graclabs.ec@gmail.com.</p>]]></description>
-<content:encoded><![CDATA[<p>Meet The Cuenca Brief, a short, friendly news briefing for English speakers living in and around Cuenca, Ecuador: news from Cuenca and Azuay, the big stories from across Ecuador and the Andes, practical notices you can use, opportunities, culture and events.</p>
-<p>New episodes: early Sunday morning (the week that was and the week ahead), Tuesday afternoon, Thursday late morning (your weekend preview) and early Friday morning (a quick weekend update). Sources for every story are listed in each episode's notes.</p>
+<content:encoded><![CDATA[<p>The Cuenca Brief is a short, friendly news briefing for English speakers living in and around Cuenca, Ecuador: news from Cuenca and Azuay, the big stories from across Ecuador and the Andes, practical notices you can use, opportunities, science and technology, culture, events and a little sports.</p>
+<p>When new episodes arrive (Cuenca time, UTC−5):<br>Sundays around 5:00 am: the week that was and the week ahead (up to 15 minutes)<br>Tuesdays around 4:00 pm: the latest news (up to 10 minutes)<br>Thursdays around 11:00 am: a quick catch-up and your weekend preview (up to 10 minutes)<br>Fridays around 5:00 am: a short weekend update (up to 5 minutes)</p>
+<p>First regular episode: Tuesday, November 17, 2026, around 4:00 pm. Sources for every story are listed in each episode's notes.</p>
 <p>The Cuenca Brief is written with AI assistance and narrated by an AI voice. Produced by GRAC Labs. For advertising, message us on WhatsApp at +593 99 535 8888 (<a href="https://wa.me/593995358888">https://wa.me/593995358888</a>) or email graclabs.ec@gmail.com.</p>]]></content:encoded>
-<enclosure url="https://graclabs-ec.github.io/cuenca-brief/audio/cuenca-brief-trailer.mp3" length="682571" type="audio/mpeg"/>
+<enclosure url="https://graclabs-ec.github.io/cuenca-brief/audio/cuenca-brief-trailer.mp3" length="1048703" type="audio/mpeg"/>
 <guid isPermaLink="false">cuenca-brief-2026-11-15-trailer</guid>
-<pubDate>Sun, 15 Nov 2026 22:37:30 GMT</pubDate>
-<itunes:duration>85</itunes:duration>
+<pubDate>Sun, 15 Nov 2026 22:41:47 GMT</pubDate>
+<itunes:duration>131</itunes:duration>
 <itunes:episodeType>trailer</itunes:episodeType>
 <itunes:explicit>false</itunes:explicit>
 </item>
