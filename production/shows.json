@@ -19,7 +19,8 @@
         "subscribe": "Subscribe with any podcast app using the RSS feed",
         "home": "GRAC Labs podcasts",
         "minutes": "min",
-        "spotify": "Listen on Spotify"
+        "spotify": "Listen on Spotify",
+        "notes": "Show notes"
       },
       "links": {
         "spotify": "https://open.spotify.com/show/4k85HHAMbFI3YRl0Lm7GF2"
@@ -40,10 +41,12 @@
         "subscribe": "Suscríbase con cualquier app de pódcast usando el feed RSS",
         "home": "Pódcasts de GRAC Labs",
         "minutes": "min",
-        "spotify": "Escuchar en Spotify"
+        "spotify": "Escuchar en Spotify",
+        "notes": "Notas del episodio"
       },
       "links": {}
     }
   },
-  "audio_retention_days": 84
+  "audio_retention_days": 84,
+  "whatsapp": "+593 99 535 8888"
 }

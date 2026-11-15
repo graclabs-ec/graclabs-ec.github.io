@@ -65,7 +65,25 @@ def read_notes(path):
     return title, body
 
 
-URL_RE = re.compile(r"https?://[^\s<>\"]+[^\s<>\".,;:!?)\]]")
+# The GRAC Labs WhatsApp number (any spacing, with or without +593 or a leading 0) becomes a
+# WhatsApp link, swallowing a "(https://wa.me/...)" that follows it; other URLs and email
+# addresses become plain links. One pass, so nothing is linked twice.
+WA_DIGITS = re.sub(r"\D", "", CFG.get("whatsapp", "+593 99 535 8888"))
+_local = WA_DIGITS[3:] if WA_DIGITS.startswith("593") else WA_DIGITS
+_sep = r"[\s-]?"
+WA_NUM = r"(?:\+?593" + _sep + _sep.join(_local) + r"|0" + _sep.join(_local) + r")"
+TOKEN_RE = re.compile(
+    r"(?P<wa>" + WA_NUM + r")(?P<waurl>\s*\(https?://wa\.me/\d+\))?"
+    r"|(?P<url>https?://[^\s<>\"]+[^\s<>\".,;:!?)\]])"
+    r"|(?P<email>[\w.+-]+@[\w-]+(?:\.[\w-]+)+)")
+
+
+def _link(m):
+    if m.group("wa"):
+        return f'<a href="https://wa.me/{WA_DIGITS}">{m.group("wa")}</a>'
+    if m.group("url"):
+        return f'<a href="{m.group("url")}">{m.group("url")}</a>'
+    return f'<a href="mailto:{m.group("email")}">{m.group("email")}</a>'
 
 
 def notes_html(text):
@@ -75,7 +93,7 @@ def notes_html(text):
         lines = []
         for line in p.splitlines():
             esc = html.escape(line.strip(), quote=False)
-            lines.append(URL_RE.sub(lambda m: f'<a href="{m.group(0)}">{m.group(0)}</a>', esc))
+            lines.append(TOKEN_RE.sub(_link, esc))
         out.append("<p>" + "<br>".join(lines) + "</p>")
     return "\n".join(out)
 
@@ -157,7 +175,7 @@ def build_page(show, eps):
             f'<h3>{html.escape(e["title"])}</h3>\n'
             f'<p class="meta">{when} · {mins} {lab["minutes"]}</p>\n'
             f'<audio controls preload="none" src="{html.escape(e["url"])}"></audio>\n'
-            f'<details><summary>Notes</summary>\n{notes_html(e["notes"])}\n</details>\n'
+            f'<details open><summary>{html.escape(lab.get("notes", "Notes"))}</summary>\n{notes_html(e["notes"])}\n</details>\n'
             f'</article>')
     links = show.get("links", {})
     listen = ""
