@@ -1,0 +1,78 @@
+# Production instructions: The Cuenca Brief and Cuenca en Breve
+
+These are the step-by-step instructions for each scheduled run. Produce, publish and deliver today's episodes of the owner's two news podcasts, both produced by GRAC Labs (never use the old name "GRAC Apps"): "The Cuenca Brief" (English, for Cuenca's expat community) and "Cuenca en Breve" (Spanish, for local listeners, especially younger, tech-minded people). Both shows carry the same content in two languages. Nobody is watching the run: don't ask questions, make sensible calls, keep going, and finish before the release time below.
+
+REPO below means the path of your clone of graclabs-ec/graclabs-ec.github.io (this repository). Work in your own working directory, not inside REPO, except where a step says otherwise.
+
+STEP 0 - START THE VOICE ENGINE SETUP FIRST (in the background, so it is ready when the scripts are):
+pip install --break-system-packages -q kokoro-onnx soundfile
+mkdir -p tts && curl -sL -o tts/voices-v1.0.bin https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin && curl -sL -o tts/kokoro-v1.0.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+ffmpeg should already be installed.
+
+STEP 1 - WORK OUT WHICH EPISODE THIS IS. Run: TZ=America/Guayaquil date
+- SUNDAY (released about 5:00 am): two parts. "The Week That Was": the most important stories of the past week, Monday to Saturday. "The Week Ahead": what is coming this week (events, deadlines, notices, planned outages or closures, opportunities). Maximum 15 minutes, about 2,000 English words; 12 to 15 minutes is typical.
+- TUESDAY (released about 4:00 pm, for the commute home): news from Monday and Tuesday, updates on ongoing local stories, and this week's events. Maximum 10 minutes, about 1,400 English words.
+- THURSDAY (released about 11:00 am): a two-minute catch-up on Wednesday's and Thursday morning's news, then the weekend preview: cultural events, festivals, concerts, exhibitions, markets and family activities from Friday to Sunday, with times, places and prices. Maximum 10 minutes, about 1,400 English words.
+- FRIDAY (released about 5:00 am, for the morning commute or an early run): a short weekend update with events announced or changed since Thursday, a quick reminder of the two or three top weekend highlights, plus weekend weather, roads and alerts. Maximum 5 minutes, about 700 English words.
+These are maximums, not targets. On a slow day, go shorter; never pad or stretch a story. On any other weekday (a manual test run), make a Tuesday-style episode.
+
+STEP 2 - RESEARCH.
+Geography: Cuenca (city and rural parishes); Azuay and southern Ecuador (Cañar, Morona Santiago, and El Oro or Loja when relevant); Ecuador; and the Andean region (Colombia, Peru, Bolivia, Chile, Venezuela).
+Coverage window: Sunday, the past 7 days plus the coming 7; Tuesday, since Sunday morning; Thursday, since Tuesday afternoon plus the weekend; Friday, since Thursday morning plus the weekend.
+Content mix (approximate share of airtime in Sunday and Tuesday episodes; Thursday and Friday are mostly culture and events by design):
+- 20% Major news: the big regional and national stories people will be talking about, including the economy.
+- At most 15% politics and crime, with a light touch: only when they affect daily life or are truly major, in one or two factual sentences, without detail.
+- 15% News you can use: practical notices for residents, such as water and power cuts and their schedules, road closures and traffic, public transport and tram changes, paperwork and tax deadlines, election logistics, health and vaccination campaigns, weather and risk alerts, and price changes that affect households.
+- 20% Opportunities and progress: new public works and projects, new businesses and entrepreneurship, startups and innovation, scholarships, courses, job fairs and calls for applications, and science, technology and education developments.
+- 20% Culture and events: festivals, concerts, exhibitions, markets, food, and community events people can attend.
+- 5% Sports: upcoming games of the local and national football teams (Deportivo Cuenca, Ecuador's national team "La Tri"), and Ecuadorian athletes in the news, such as Richard Carapaz or Ecuador's Olympic medalists. Fixtures, results and achievements only, never gossip. Fit these into the culture and events sections (Out and About, Weekend in Cuenca, The Week Ahead) or into The Week That Was.
+- The remaining 5% is flexible: give it to whichever category has the strongest stories that day.
+Avoid: political squabbles (accusations, insults, polls, party infighting, partisan opinion); crime coverage for its own sake (no graphic detail, no names of victims or suspects; mention crime only for its public-safety value); celebrity and sports gossip; unverified rumors and viral social media claims; sensationalism and clickbait; editorializing (report, don't endorse); anything that sounds like advertising outside a clearly marked sponsor slot. Keep politics strictly factual and balanced.
+Use WebSearch (mode "extended" for news, several searches in one turn) and WebFetch to read the actual articles, since search snippets are not enough. Useful sources: El Mercurio (elmercurio.com.ec) for Cuenca and Azuay; Primicias, El Universo, El Comercio, Expreso, Teleamazonas, Metro Ecuador and El Diario for national news; official sources for notices (Municipio de Cuenca, ETAPA, Centrosur, ECU 911, Inamhi, the Ministry of Education, the CNE); the Municipio de Cuenca cultural agenda, Casa de la Cultura Núcleo del Azuay and El Mercurio's culture pages for events; the sports pages of El Mercurio and El Universo for fixtures and athletes; Andina (Peru), La Razón (Bolivia) and similar outlets for the region. WARNING: "El Digital de Cuenca", "Voces de Cuenca", "La Cerca" and similar outlets cover Cuenca, SPAIN; never use them. Check every article's date and use only stories inside the window, plus upcoming events.
+Weather: use a weather tool if one is available; otherwise WebFetch https://api.open-meteo.com/v1/forecast?latitude=-2.90&longitude=-79.00&current=temperature_2m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=America%2FGuayaquil&forecast_days=7 and add any Inamhi alert for Azuay you found.
+
+STEP 3 - WRITE THE ENGLISH SCRIPT for the ear, saved as cuenca-brief-YYYY-MM-DD.txt.
+It starts with a line containing only [chapter: Headlines], then the opening: "Hello, and welcome to The {Cuenca} Brief for <Weekday>, <Month> <day in words>." plus one line on what the show is, then "Here's what's ahead." with three to five items in one short paragraph. Use this time-neutral greeting, because people listen at different times. Never address the owner or anyone else by name.
+Each section then starts with a line containing only [cue: <Tagline>] (blank lines around it), which plays a chime and marks a chapter, followed at once by a paragraph that speaks the tagline, such as "Around {Cuenca}." Taglines (English | Spanish):
+- The Week That Was | Lo que pasó en la semana
+- The Week Ahead | La semana que viene
+- Around Cuenca | Por Cuenca (Cuenca, Azuay and the south)
+- Across Ecuador | Por el Ecuador (national)
+- Around the Andes | Por la región andina (Andean region)
+- Out and About | De paseo (culture and events this week)
+- Weekend in Cuenca | Finde en Cuenca (weekend events)
+- Good to Know | Para tener en cuenta (weather, roads, traffic, outages, alerts, deadlines)
+Sections per episode:
+- Sunday: The Week That Was (local first, then Ecuador, then the Andes), The Week Ahead, Good to Know.
+- Tuesday: Around Cuenca, Across Ecuador, Around the Andes, Out and About, Good to Know.
+- Thursday: Around Cuenca (the two-minute catch-up of local and national news), Weekend in Cuenca, Good to Know.
+- Friday: Weekend in Cuenca, Good to Know.
+Drop a section and its [cue] if there's nothing worth saying. Put the most important story first, both in the preview and in each section, so listeners who stop early still get it. Good to Know always includes a short Cuenca weather forecast for the days that matter (Sunday: the week in brief; Thursday and Friday: the weekend).
+For newcomers, explain local institutions briefly the first time they come up, for example "{Centrosur}, the regional power company" or "E C U nine one one, the national emergency service".
+End every episode with a one-line pointer to the next episode (after Sunday: Tuesday afternoon; after Tuesday: Thursday late morning; after Thursday: early Friday morning; after Friday: early Sunday morning), then exactly: "Sources for today's stories are listed in the episode notes. The {Cuenca} Brief is written with AI assistance and narrated by an AI voice. It's produced by GRAC Labs. For advertising, message us on WhatsApp at zero nine nine, five three five, eight eight eight eight."
+Formatting rules for the voice engine: plain paragraphs separated by blank lines, one story per paragraph, no headings, bullets or markdown. Every sentence ends with a period, question mark or exclamation mark. Write numbers, years and dates out in words ("two thousand one hundred twenty-two", "twenty twenty-seven", "October twenty-ninth"). Write "AI", never "A.I.". No abbreviations with periods ("p.m.", "a.m.", "Dr.", "U.S."): say "six in the evening", "the United States". Wrap every Spanish proper noun (places, people, institutions, Spanish titles) in curly braces so it's pronounced in Latin American Spanish, for example {Cuenca}, {Azuay}, {Victoria del Portete}, {Universidad de Cuenca}, {El Mercurio}, El {Niño}. Leave English words and widely known English names unbraced (Ecuador, Peru, Bolivia, Chile, Colombia, Venezuela, La Paz). Paraphrase everything in your own words, with no quotes longer than a few words. Attribute single-outlet or disputed figures ("according to {Expreso}"). Prefer concrete numbers and practical takeaways: what it means for someone living in Cuenca.
+
+STEP 4 - WRITE THE SPANISH SCRIPT, saved as cuenca-en-breve-YYYY-MM-DD.txt: a natural Latin American Spanish version of the same stories and structure (adapt, don't translate word for word), with the same [chapter: ...] and [cue: ...] lines but using the Spanish taglines, and the first line [chapter: Titulares]. Opening: "Hola, y bienvenidos a Cuenca en Breve, para este <día de la semana> <día en palabras> de <mes>." Locals don't need the newcomer explanations; keep only the ones that help. Write numbers and dates in Spanish words. Do not use braces for Spanish words; use braces only for English words or names that should sound English, such as {startups} or {GRAC Labs}. End with the pointer to the next episode, then exactly: "Las fuentes de las noticias de hoy están en las notas del episodio. Cuenca en Breve se escribe con ayuda de inteligencia artificial y se narra con una voz de inteligencia artificial. Es una producción de {GRAC Labs}. Para publicidad, escríbanos por {WhatsApp} al cero nueve nueve, cinco tres cinco, ocho ocho ocho ocho." Aim for about the same running time as the English version.
+
+STEP 5 - CHECK BOTH SCRIPTS before making audio: every fact matches its source article; relative dates ("tomorrow", "last Friday") are correct for today; nothing comes from Cuenca, Spain; the content mix and avoid list are respected; and each script fits its maximum length (English runs about 140 words per minute at this pace).
+
+STEP 6 - MAKE THE AUDIO with REPO/production/make_episode.py (don't copy or modify it). Render both shows, one after the other, in a single Bash call with run_in_background and a timeout of 2400000 ms:
+python3 -I REPO/production/make_episode.py cuenca-brief-YYYY-MM-DD.txt cuenca-brief-YYYY-MM-DD.mp3 tts; python3 -I REPO/production/make_episode.py cuenca-en-breve-YYYY-MM-DD.txt cuenca-en-breve-YYYY-MM-DD.mp3 tts --lang es; ffprobe -v error -show_entries format=duration -of csv=p=0 cuenca-brief-YYYY-MM-DD.mp3; ffprobe -v error -show_entries format=duration -of csv=p=0 cuenca-en-breve-YYYY-MM-DD.mp3
+Rendering takes roughly 30 to 40 seconds per minute of audio. Wait for the completion notification; do not poll with "pgrep -f make_episode" (it matches its own command line and never exits). Each render also writes a .chapters.txt file next to its MP3 (empty when the episode is too short for chapters). The voices stay natural: never pitch-shift or otherwise process them. If an episode runs more than a minute over its maximum, shorten the script and render that one again.
+
+STEP 7 - WRITE THE SHOW NOTES for each show in its own language, as plain text ready to paste into a podcast platform, saved as cuenca-brief-YYYY-MM-DD-notes.txt and cuenca-en-breve-YYYY-MM-DD-notes.txt:
+- First line: the episode title alone, with no "Title:" label: "<Weekday, Month Day>: <top story in a few words>" (in Spanish: "<Día> <número> de <mes>: <noticia principal>"). Then a blank line, then the rest. Everything after the first line becomes the episode description in the feed.
+- A two- or three-sentence summary.
+- "In this episode:" / "En este episodio:" with the headlines, one per line.
+- The chapter lines from the matching .chapters.txt file, copied exactly, each on its own line, if the file isn't empty.
+- "Sources:" / "Fuentes:" with each article used as "Outlet – headline: URL".
+- Closing lines, exactly: "The Cuenca Brief is written with AI assistance and narrated by an AI voice. Produced by GRAC Labs. For advertising, message us on WhatsApp at +593 99 535 8888 (https://wa.me/593995358888) or email graclabs.ec@gmail.com." / "Cuenca en Breve se escribe con ayuda de inteligencia artificial y se narra con una voz de inteligencia artificial. Producido por GRAC Labs. Para publicidad, escríbanos por WhatsApp al +593 99 535 8888 (https://wa.me/593995358888) o al correo graclabs.ec@gmail.com."
+
+STEP 8 - PUBLISH TO THE FEEDS. From your working directory run:
+python3 -I REPO/production/publish.py --repo REPO --date YYYY-MM-DD --en cuenca-brief-YYYY-MM-DD.mp3 --en-notes cuenca-brief-YYYY-MM-DD-notes.txt --es cuenca-en-breve-YYYY-MM-DD.mp3 --es-notes cuenca-en-breve-YYYY-MM-DD-notes.txt
+Add --commit-note "<lines>" if your session asks you to add attribution lines to commits. The script uploads both MP3s as assets of the GitHub release ep-YYYY-MM-DD, adds the episodes to cuenca-brief/episodes.json and cuenca-en-breve/episodes.json, rebuilds both RSS feeds and show pages, and commits and pushes; GitHub Pages then updates https://graclabs-ec.github.io within a few minutes. Running it again for the same date replaces that day's episodes rather than duplicating them. If it fails, read the error, fix what you can (for example a push rejected because the remote moved) and run it once more; if it still fails, carry on to STEP 9 and report the failure.
+
+STEP 9 - DELIVER TO THE OWNER:
+1. SendUserFile with both MP3s and both notes files, status "proactive", caption "<Weekday, Month Day> episodes: The Cuenca Brief (<N> min) and Cuenca en Breve (<N> min)".
+2. SendUserMessage with the English headlines, one line each; one line saying the episodes are live in the feeds (or that publishing failed, and why); and a "Sources:" list of the articles used as markdown links.
+If the audio fails, still deliver both scripts and both notes files with SendUserFile, say in one line that the audio didn't render and why, and don't publish.
