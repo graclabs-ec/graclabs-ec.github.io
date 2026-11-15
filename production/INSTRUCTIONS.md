@@ -74,6 +74,7 @@ Spanish:
 ¿Le gusta lo que escucha? Califique Cuenca en Breve en Spotify (https://open.spotify.com/show/3o3nURnLz0GW8mWpZXSPOW).
 Para comentarios o publicidad, escríbanos por WhatsApp al +593 99 535 8888 (https://wa.me/593995358888) o al correo graclabs.ec@gmail.com.
 Cuenca en Breve se escribe con ayuda de inteligencia artificial y se narra con una voz de inteligencia artificial. Producido por GRAC Labs.
+Don't add a list of listening platforms: publish.py appends the "Listen on" line with every platform in production/shows.json.
 
 STEP 8 - PUBLISH TO THE FEEDS. From your working directory run:
 python3 -I REPO/production/publish.py --repo REPO --date YYYY-MM-DD --en cuenca-brief-YYYY-MM-DD.mp3 --en-notes cuenca-brief-YYYY-MM-DD-notes.txt --es cuenca-en-breve-YYYY-MM-DD.mp3 --es-notes cuenca-en-breve-YYYY-MM-DD-notes.txt

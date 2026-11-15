@@ -101,6 +101,26 @@ def notes_html(text):
     return "\n".join(out)
 
 
+# Listening platforms, in display order. Add a show's link under "links" in shows.json
+# (e.g. "apple": "https://podcasts.apple.com/...") and every page, feed and episode picks it up.
+PLATFORMS = [("spotify", "Spotify"), ("apple", "Apple Podcasts"), ("youtube", "YouTube"),
+             ("amazon", "Amazon Music"), ("ivoox", "iVoox")]
+
+
+def platform_links(show):
+    links = show.get("links", {})
+    return [(name, links[key]) for key, name in PLATFORMS if links.get(key)]
+
+
+def listen_html(show):
+    items = platform_links(show)
+    if not items:
+        return ""
+    label = html.escape(show["labels"].get("listen_on", "Listen on"))
+    return "<p>" + label + ": " + " · ".join(
+        f'<a href="{html.escape(url)}">{name}</a>' for name, url in items) + "</p>"
+
+
 def cdata(s):
     return "<![CDATA[" + s.replace("]]>", "]]]]><![CDATA[>") + "]]>"
 
@@ -149,7 +169,7 @@ def build_feed(show, eps):
          f"<lastBuildDate>{now}</lastBuildDate>",
          "<generator>GRAC Labs publish.py</generator>"]
     for e in eps:
-        body = notes_html(e["notes"])
+        body = notes_html(e["notes"]) + "\n" + listen_html(show)
         x += ["<item>",
               f"<title>{escape(e['title'])}</title>",
               f"<link>{escape(base + '#' + e['guid'])}</link>",
@@ -178,13 +198,13 @@ def build_page(show, eps):
             f'<h3>{html.escape(e["title"])}</h3>\n'
             f'<p class="meta">{when} · {mins} {lab["minutes"]}</p>\n'
             f'<audio controls preload="none" src="{html.escape(e["url"])}"></audio>\n'
-            f'<details open><summary>{html.escape(lab.get("notes", "Notes"))}</summary>\n{notes_html(e["notes"])}\n</details>\n'
+            f'<details open><summary>{html.escape(lab.get("notes", "Notes"))}</summary>\n{notes_html(e["notes"])}\n{listen_html(show)}\n</details>\n'
             f'</article>')
-    links = show.get("links", {})
     listen = ""
-    if links.get("spotify"):
-        listen = (f'<p class="listen"><a class="btn spotify" href="{html.escape(links["spotify"])}">'
-                  f'{html.escape(lab.get("spotify", "Spotify"))}</a></p>')
+    if platform_links(show):
+        listen = '<p class="listen">' + " ".join(
+            f'<a class="btn {"spotify" if name == "Spotify" else "platform"}" href="{html.escape(url)}">{name}</a>'
+            for name, url in platform_links(show)) + "</p>"
     page = f"""<!DOCTYPE html>
 <html lang="{show['language']}">
 <head>

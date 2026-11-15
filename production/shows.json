@@ -20,7 +20,8 @@
         "home": "GRAC Labs podcasts",
         "minutes": "min",
         "spotify": "Listen on Spotify",
-        "notes": "Show notes"
+        "notes": "Show notes",
+        "listen_on": "Listen to The Cuenca Brief on"
       },
       "links": {
         "spotify": "https://open.spotify.com/show/4k85HHAMbFI3YRl0Lm7GF2"
@@ -42,7 +43,8 @@
         "home": "Pódcasts de GRAC Labs",
         "minutes": "min",
         "spotify": "Escuchar en Spotify",
-        "notes": "Notas del episodio"
+        "notes": "Notas del episodio",
+        "listen_on": "Escuche Cuenca en Breve en"
       },
       "links": {
         "spotify": "https://open.spotify.com/show/3o3nURnLz0GW8mWpZXSPOW"

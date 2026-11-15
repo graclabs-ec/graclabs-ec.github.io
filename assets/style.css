@@ -47,6 +47,8 @@ a { color: var(--blue); }
   background: var(--navy); color: #fff;
 }
 .btn.spotify { background: #1DB954; color: #fff; }
+.btn.platform { background: var(--gold); color: var(--navy); }
+.listen .btn { margin: 0 6px 6px 0; }
 .listen { margin: 10px 0 0; }
 .btn.alt { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
 .contact { max-width: 980px; margin: 0 auto 48px; padding: 0 20px; text-align: center; color: var(--muted); }
