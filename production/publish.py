@@ -161,7 +161,7 @@ def save_episodes(slug, eps):
 def build_feed(show, eps):
     slug = show["slug"]
     base = f"{SITE}/{slug}/"
-    cover = f"{SITE}/{slug}/cover.jpg"
+    cover = f"{SITE}/{slug}/{show.get('cover', 'cover.jpg')}"  # set "cover" in shows.json for seasonal art
     now = email.utils.format_datetime(dt.datetime.now(dt.timezone.utc), usegmt=True)
     cat, sub = show["category"]
     x = ['<?xml version="1.0" encoding="UTF-8"?>',
@@ -232,13 +232,13 @@ def build_page(show, eps):
 <title>{html.escape(show['title'])} · GRAC Labs</title>
 <meta name="description" content="{html.escape(show['page_intro'])}">
 <link rel="alternate" type="application/rss+xml" title="{html.escape(show['title'])}" href="feed.xml">
-<link rel="icon" href="cover.jpg">
+<link rel="icon" href="{show.get('cover', 'cover.jpg')}">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
 <header class="show">
 <a class="home" href="../">← {html.escape(lab['home'])}</a>
-<img src="cover.jpg" alt="{html.escape(show['title'])}" width="220" height="220">
+<img src="{show.get('cover', 'cover.jpg')}" alt="{html.escape(show['title'])}" width="220" height="220">
 <div>
 <h1>{html.escape(show['title'])}</h1>
 <p>{html.escape(show['page_intro'])}</p>
