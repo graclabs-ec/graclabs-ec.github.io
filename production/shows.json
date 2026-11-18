@@ -21,11 +21,13 @@
         "minutes": "min",
         "spotify": "Listen on Spotify",
         "notes": "Show notes",
-        "listen_on": "Listen to The Cuenca Brief on"
+        "listen_on": "Listen to The Cuenca Brief on",
+        "other_language": "Also in Spanish"
       },
       "links": {
         "spotify": "https://open.spotify.com/show/4k85HHAMbFI3YRl0Lm7GF2"
-      }
+      },
+      "sister": "es"
     },
     "es": {
       "slug": "cuenca-en-breve",
@@ -44,11 +46,13 @@
         "minutes": "min",
         "spotify": "Escuchar en Spotify",
         "notes": "Notas del episodio",
-        "listen_on": "Escuche Cuenca en Breve en"
+        "listen_on": "Escuche Cuenca en Breve en",
+        "other_language": "También en inglés"
       },
       "links": {
         "spotify": "https://open.spotify.com/show/3o3nURnLz0GW8mWpZXSPOW"
-      }
+      },
+      "sister": "en"
     }
   },
   "audio_retention_days": 84,

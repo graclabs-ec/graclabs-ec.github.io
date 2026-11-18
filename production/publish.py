@@ -121,6 +121,25 @@ def listen_html(show):
         f'<a href="{html.escape(url)}">{name}</a>' for name, url in items) + "</p>"
 
 
+def sister_html(show, e):
+    """The same episode in the other language: "Also in Spanish: Cuenca en Breve · Spotify".
+
+    The show's "sister" in shows.json names the other-language show. The title links to the
+    matching episode on the sister's page when one was published the same day, else to its page.
+    """
+    other = CFG["shows"].get(show.get("sister", ""))
+    if not other:
+        return ""
+    page = f"{SITE}/{other['slug']}/"
+    twin = e["guid"].replace(show["slug"], other["slug"], 1)
+    if any(x["guid"] == twin for x in load_episodes(other["slug"])):
+        page += "#" + twin
+    label = html.escape(show["labels"].get("other_language", "Also available in"))
+    links = [f'<a href="{html.escape(page)}">{html.escape(other["title"])}</a>'] + [
+        f'<a href="{html.escape(url)}">{name}</a>' for name, url in platform_links(other)]
+    return "<p>" + label + ": " + " · ".join(links) + "</p>"
+
+
 def cdata(s):
     return "<![CDATA[" + s.replace("]]>", "]]]]><![CDATA[>") + "]]>"
 
@@ -169,7 +188,7 @@ def build_feed(show, eps):
          f"<lastBuildDate>{now}</lastBuildDate>",
          "<generator>GRAC Labs publish.py</generator>"]
     for e in eps:
-        body = notes_html(e["notes"]) + "\n" + listen_html(show)
+        body = notes_html(e["notes"]) + "\n" + listen_html(show) + sister_html(show, e)
         x += ["<item>",
               f"<title>{escape(e['title'])}</title>",
               f"<link>{escape(base + '#' + e['guid'])}</link>",
@@ -198,7 +217,7 @@ def build_page(show, eps):
             f'<h3>{html.escape(e["title"])}</h3>\n'
             f'<p class="meta">{when} · {mins} {lab["minutes"]}</p>\n'
             f'<audio controls preload="none" src="{html.escape(e["url"])}"></audio>\n'
-            f'<details open><summary>{html.escape(lab.get("notes", "Notes"))}</summary>\n{notes_html(e["notes"])}\n{listen_html(show)}\n</details>\n'
+            f'<details open><summary>{html.escape(lab.get("notes", "Notes"))}</summary>\n{notes_html(e["notes"])}\n{listen_html(show)}{sister_html(show, e)}\n</details>\n'
             f'</article>')
     listen = ""
     if platform_links(show):
@@ -309,9 +328,14 @@ for lang, mp3, notes in pairs:
             kept.append(e)
     eps = kept
     save_episodes(slug, eps)
+    print(f"{show['title']}: {title} ({ep['seconds']} s) -> {ep['url']}")
+
+# Build every feed and page once all episodes are saved, so each "Also in ..." line can link
+# to the other language's episode from the same day.
+for show in CFG["shows"].values():
+    eps = load_episodes(show["slug"])
     build_feed(show, eps)
     build_page(show, eps)
-    print(f"{show['title']}: {title} ({ep['seconds']} s) -> {ep['url']}")
 
 git_publish(f"Publish episodes {args.date}" + (" (trailer)" if args.kind == "trailer" else ""))
 print("Feeds:", ", ".join(f"{SITE}/{s['slug']}/feed.xml" for s in CFG["shows"].values()))
